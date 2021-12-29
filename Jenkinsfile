@@ -7,8 +7,8 @@ node {
     stage('checkout') 
        {
         // Check out the C sharp code from a GitHub repository by using below pipeline syntax command
-         //git_Url = "https://github.com/mohankrishna1990/C-Sharp-Examples.git"
-         git_Url = "https://github.com/malcomvetter/WidgetSender.git"
+         git_Url = "https://github.com/mohankrishna1990/C-Sharp-Examples.git"
+         //git_Url = "https://github.com/malcomvetter/WidgetSender.git"
          
          //Below command is used to check Git URL
          checkout([$class: 'GitSCM',branches: [[name: '*/master']], extensions: [],userRemoteConfigs: [[credentialsId: 'Git_repo_ID', url: "${git_Url}"]]])
