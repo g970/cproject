@@ -18,12 +18,12 @@ node {
         msbuildHome = tool 'MSbuild_Home'
         scannerHome = tool 'SonarScanner_MSBuild'
         sonar_url = "http://localhost:9000"
-        sonar_project_token = "7d1a54173391c7f5b05a7a169732c4beae609c9e"
+        sonar_project_token = "3dbde245e6c577c45931f27f443311b366cdc8ac"
             
             withSonarQubeEnv() 
             {
             //Below command is used to begin the sonar scanner for our porject(jenkins_pipeline_scripted is the name of the token from sonar)   
-            bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" begin /k:jenkins_pipeline_scripted /d:sonar.host.url=${sonar_url} /d:sonar.login=${sonar_project_token}"
+            bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" begin /k:csharp_pipeline_as_code /d:sonar.host.url=${sonar_url} /d:sonar.login=${sonar_project_token}"
             //Below command is used to generate the nuget package for rebbuild
             bat "\"${msbuildHome}\\MSBuild.exe\" -t:restore"
             //Below command is used to build the application
