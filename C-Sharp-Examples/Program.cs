@@ -7,7 +7,8 @@ namespace C_Sharp_Examples
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            Console.WriteLine("so far, so good...");
+            var myBinaryFormatter = new BinaryFormatter();
+            myBinaryFormatter.Deserialize(stream); // Noncompliant: a binder is not used to limit types during deserialization
         }
     }
 }
