@@ -18,7 +18,7 @@ node {
         msbuildHome = tool 'MSbuild_Home'
         scannerHome = tool 'SonarScanner_MSBuild'
         sonar_url = "http://localhost:9000"
-        sonar_project_token = "06c9ec68cfd4f8d71ae92c1c35cee8bbe35a4a9f"
+        sonar_project_token = "c619d5e18e613cce82aef852ccb080c43d442269"
             
             withSonarQubeEnv() 
             {
