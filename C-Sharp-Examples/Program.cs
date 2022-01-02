@@ -9,10 +9,10 @@ namespace C_Sharp_Examples
             Console.WriteLine("Hello World!");
             //var myBinaryFormatter = new BinaryFormatter();
             //myBinaryFormatter.Deserialize(stream); // Noncompliant: a binder is not used to limit types during deserialization
-            DirectoryEntry myDirectoryEntry = new DirectoryEntry(adPath);
-            myDirectoryEntry.AuthenticationType = AuthenticationTypes.None; // Noncompliant
+            var decodedtoken1 = decoder.Decode(token, secret, verify: false); // Noncompliant: signature should be verified
 
-            DirectoryEntry myDirectoryEntry = new DirectoryEntry(adPath, "u", "p", AuthenticationTypes.None); // Noncompliant
-        }
+            var decodedtoken2 = new JwtBuilder()
+               .WithSecret(secret)
+               .Decode(forgedtoken1); // Noncompliant: signature should be verified        }
     }
 }
