@@ -23,7 +23,7 @@ node {
             withSonarQubeEnv() 
             {
             //Below command is used to begin the sonar scanner for our porject(jenkins_pipeline_scripted is the name of the token from sonar)   
-            bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" begin /k:csharp_pipeline_as_code /d:sonar.host.url=${sonar_url} /d:sonar.login=${sonar_project_token}"
+            bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" begin /k:C_sharp_example /d:sonar.host.url=${sonar_url} /d:sonar.login=${sonar_project_token}"
             //Below command is used to generate the nuget package for rebbuild
             bat "\"${msbuildHome}\\MSBuild.exe\" -t:restore"
             //Below command is used to build the application
