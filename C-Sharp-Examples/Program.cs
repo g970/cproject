@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace C_Sharp_Examples
 {
@@ -10,4 +10,3 @@ namespace C_Sharp_Examples
         }
     }
 }
-
