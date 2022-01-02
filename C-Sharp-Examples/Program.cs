@@ -7,6 +7,7 @@ namespace C_Sharp_Examples
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+            Console.WriteLine("so far, so good...");
         }
     }
 }
