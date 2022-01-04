@@ -8,10 +8,12 @@ node {
        {
         // Check out the C sharp code from a GitHub repository by using below pipeline syntax command
          git_Url = "https://github.com/mohankrishna1990/C-Sharp-Examples.git"
-         //git_Url = "https://github.com/malcomvetter/WidgetSender.git"
          
          //Below command is used to check Git URL
-         checkout([$class: 'GitSCM',branches: [[name: '*/master']], extensions: [],userRemoteConfigs: [[credentialsId: 'Git_repo_ID', url: "${git_Url}"]]])
+         checkout([$class: 'GitSCM',
+                   branches: [[name: '*/master']], 
+                   extensions: [],
+                   userRemoteConfigs: [[credentialsId: 'Git_repo_ID', url: "${git_Url}"]]])
          }
     stage('static_code_analysis') 
         {
@@ -30,7 +32,7 @@ node {
             //Below command is used to begin the sonar scanner for our porject(jenkins_pipeline_scripted is the name of the token from sonar)   
             bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" begin /k:csharp_pipeline_as_code /d:sonar.host.url=${sonar_url} /d:sonar.login=${sonar_project_token}"
             //Below command is used to generate the nuget package for rebbuild
-            bat "\"${msbuildHome}\\MSBuild1.exe\" -t:restore"
+            bat "\"${msbuildHome}\\MSBuild.exe\" -t:restore"
             //Below command is used to build the application
             bat "\"${msbuildHome}\\MSBuild.exe\" /t:Rebuild"
             //Below command is used to end the sonar scanner which we have begin in first step
@@ -39,19 +41,16 @@ node {
         }    
         catch (err) {
             echo 'Sending email because above stage failed'
-            echo err.getMessage()
             echo "Error detected, but we will continue to send Email."
             //throw
              stage('send_email') 
          {
-            //emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
-            //working
-             //emailext attachLog: true, body: 'Email from Csharp pipeline as code', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Email from Jenkins Csharp pipeline as code'
-             emailext attachLog: true, body: '<b>Failed in sonar scanner job</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> Build URL: ${env.BUILD_URL}', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'ERROR in Csharp-pipeline-as-code: Pipeline Name: -> ${env.JOB_NAME}'
-             //mail bcc: '', body: 'From C sharp project jenkins pipeline as code', cc: '', from: 'From C sharp project jenkins pipeline as code', replyTo: 'mohankrishnavenkata82@gmail.com', subject: 'From C sharp project jenkins pipeline as code', to: 'mohankrishnavenkata82@gmail.com'
-            //mail bcc: '', body: "<b>Failed in sonar scanner job</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> Build URL: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR in Csharp-pipeline-as-code: Pipeline Name: -> ${env.JOB_NAME}", to: "mohankrishnavenkata82@gmail.com"; 
-             //emailext attachLog: true, body: 'Test', subject: 'Test', to: 'mohankrishnavenkata82@gmail.com'
-           }
+            emailext 
+                attachLog: true, 
+                body: '<b>Failed in sonar scanner stage</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> Build URL: ${env.BUILD_URL}', 
+                recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], 
+                subject: 'ERROR in Csharp-pipeline-as-code: Pipeline Name: -> ${env.JOB_NAME}'
+            }
         }        
             
         }
