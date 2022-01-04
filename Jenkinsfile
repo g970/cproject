@@ -34,11 +34,12 @@ node {
             //Below command is used to end the sonar scanner which we have begin in first step
             bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" end /d:sonar.login=${sonar_project_token}"
          }
+        }    
         catch (all) {
             echo 'Something failed, I should sound the klaxons!'
             //throw
         }        
-            }
+            
         }
       stage('send_email') 
       {
