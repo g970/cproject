@@ -20,7 +20,7 @@ node {
         try 
         {
         //Testing email for failure condition(Uncomment below line only for testing)
-        bat 'exit 1'
+        //bat 'exit 1'
             
         msbuildHome = tool 'MSbuild_Home'
         scannerHome = tool 'SonarScanner_MSBuild'
@@ -49,7 +49,7 @@ node {
             emailext attachLog: true,
                 body: 'Failed in sonar scanner stage', 
                 recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], 
-                subject: 'ERROR in Csharp-pipeline-as-code: Pipeline Name'
+                subject: 'ERROR in Csharp-pipeline-as-code'
              
              //Using jenkins default Email notifications
 //              mail bcc: '', 
