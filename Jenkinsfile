@@ -15,9 +15,9 @@ node {
          }
     stage('static_code_analysis') 
         {
-        try {
-            sh 'exit 1'
-        
+        try 
+        {
+            
         msbuildHome = tool 'MSbuild_Home'
         scannerHome = tool 'SonarScanner_MSBuild'
         sonar_url = "http://localhost:9000"
@@ -33,10 +33,10 @@ node {
             bat "\"${msbuildHome}\\MSBuild.exe\" /t:Rebuild"
             //Below command is used to end the sonar scanner which we have begin in first step
             bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" end /d:sonar.login=${sonar_project_token}"
-            }
-        catch (exc) {
+         }
+        catch (all) {
             echo 'Something failed, I should sound the klaxons!'
-            throw
+            //throw
         }        
             }
         }
