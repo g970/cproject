@@ -18,7 +18,7 @@ node {
         try 
         {
         //Testing email for failure condition(Uncomment below line only for testing)
-        bat 'exit 1'
+        //bat 'exit 1'
             
         msbuildHome = tool 'MSbuild_Home'
         scannerHome = tool 'SonarScanner_MSBuild'
@@ -30,7 +30,7 @@ node {
             //Below command is used to begin the sonar scanner for our porject(jenkins_pipeline_scripted is the name of the token from sonar)   
             bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" begin /k:csharp_pipeline_as_code /d:sonar.host.url=${sonar_url} /d:sonar.login=${sonar_project_token}"
             //Below command is used to generate the nuget package for rebbuild
-            bat "\"${msbuildHome}\\MSBuild.exe\" -t:restore"
+            bat "\"${msbuildHome}\\MSBuild1.exe\" -t:restore"
             //Below command is used to build the application
             bat "\"${msbuildHome}\\MSBuild.exe\" /t:Rebuild"
             //Below command is used to end the sonar scanner which we have begin in first step
