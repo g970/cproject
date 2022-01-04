@@ -18,9 +18,9 @@ node {
         try 
         {
         //Testing email for failure condition(Uncomment below line only for testing)
-        //sh 'exit 1'
+        sh 'exit 1'
             
-        msbuildHome = tool 'MSbuild_Home'a
+        msbuildHome = tool 'MSbuild_Home'
         scannerHome = tool 'SonarScanner_MSBuild'
         sonar_url = "http://localhost:9000"
         sonar_project_token = "c619d5e18e613cce82aef852ccb080c43d442269"
@@ -40,8 +40,8 @@ node {
         catch (err) {
             echo 'Sending email because above stage failed'
             echo err.getMessage()
-            echo "Error detected, but we will continue."
-            //throw
+            echo "Error detected, but we will continue to send Email."
+            throw
              stage('send_email') 
          {
             //emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
