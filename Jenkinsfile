@@ -18,9 +18,9 @@ node {
         try 
         {
         //Testing email for failure condition(Uncomment below line only for testing)
-        sh 'exit 1'
+        //sh 'exit 1'
             
-        msbuildHome = tool 'MSbuild_Home'
+        msbuildHome = tool 'MSbuild_Home'a
         scannerHome = tool 'SonarScanner_MSBuild'
         sonar_url = "http://localhost:9000"
         sonar_project_token = "c619d5e18e613cce82aef852ccb080c43d442269"
@@ -38,7 +38,7 @@ node {
          }
         }    
         catch (all) {
-            echo 'Something failed, I should sound the klaxons!'
+            echo 'Sending email because above stage failed'
             //throw
              stage('send_email') 
          {
