@@ -18,12 +18,12 @@ node {
         try 
         {
         //Testing email for failure condition(Uncomment below line only for testing)
-        bat 'exit 1'
+        //bat 'exit 1'
             
         msbuildHome = tool 'MSbuild_Home'
         scannerHome = tool 'SonarScanner_MSBuild'
         sonar_url = "http://localhost:9000"
-        sonar_project_token = "c619d5e18e613cce82aef852ccb080c43d442269"
+        sonar_project_token = "c619d5e18e613cce82aef852ccb080c43d442269111"
             
             withSonarQubeEnv() 
             {
