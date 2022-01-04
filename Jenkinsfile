@@ -36,7 +36,7 @@ node {
       {
             //emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
             //emailext body: 'Email from Csharp pipeline as code', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvide
-              emailext attachLog: true, body: 'Test email from scripted pipelines', compressLog: true, replyTo: 'Test email from scripted pipelines', subject: 'Test email from scripted pipelines', to: 'mohankrishnavenkata82@gmail.com'r']], subject: 'Email from Jenkins Csharp pipeline as code'
+            mail bcc: '', body: 'From C sharp project jenkins pipeline as code', cc: '', from: 'From C sharp project jenkins pipeline as code', replyTo: 'mohankrishnavenkata82@gmail.com', subject: 'From C sharp project jenkins pipeline as code', to: 'mohankrishnavenkata82@gmail.com'
             
         }
     
