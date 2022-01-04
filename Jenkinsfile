@@ -37,11 +37,11 @@ node {
             bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" end /d:sonar.login=${sonar_project_token}"
          }
         }    
-        catch (all) {
+        catch (err) {
             echo 'Sending email because above stage failed'
-            //echo err.getMessage()
+            echo err.getMessage()
             echo "Error detected, but we will continue to send Email."
-            throw
+            //throw
              stage('send_email') 
          {
             //emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
