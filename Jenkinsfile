@@ -18,12 +18,12 @@ node {
         try 
         {
         //Testing email for failure condition(Uncomment below line only for testing)
-        //bat 'exit 1'
+        bat 'exit 1'
             
         msbuildHome = tool 'MSbuild_Home'
         scannerHome = tool 'SonarScanner_MSBuild'
         sonar_url = "http://localhost:9000"
-        sonar_project_token = "c619d5e18e613cce82aef852ccb080c43d442269111"
+        sonar_project_token = "c619d5e18e613cce82aef852ccb080c43d442269"
             
             withSonarQubeEnv() 
             {
@@ -48,7 +48,8 @@ node {
             //working
             //emailext body: 'Email from Csharp pipeline as code', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Email from Jenkins Csharp pipeline as code'
             //mail bcc: '', body: 'From C sharp project jenkins pipeline as code', cc: '', from: 'From C sharp project jenkins pipeline as code', replyTo: 'mohankrishnavenkata82@gmail.com', subject: 'From C sharp project jenkins pipeline as code', to: 'mohankrishnavenkata82@gmail.com'
-            mail bcc: '', body: "<b>Failed in sonar scanner job</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> Build URL: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR in Csharp-pipeline-as-code: Pipeline Name: -> ${env.JOB_NAME}", to: "mohankrishnavenkata82@gmail.com";  
+            //mail bcc: '', body: "<b>Failed in sonar scanner job</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> Build URL: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR in Csharp-pipeline-as-code: Pipeline Name: -> ${env.JOB_NAME}", to: "mohankrishnavenkata82@gmail.com"; 
+             emailext attachLog: true, body: 'Test', subject: 'Test', to: 'mohankrishnavenkata82@gmail.com'
            }
         }        
             
