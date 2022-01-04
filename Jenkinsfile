@@ -45,10 +45,14 @@ node {
             //throw
              stage('send_email') 
          {
-            emailext attachLog: true,
-                body: '<b>Failed in sonar scanner stage</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> Build URL: ${env.BUILD_URL}', 
-                recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], 
-                subject: 'ERROR in Csharp-pipeline-as-code: Pipeline Name: -> ${env.JOB_NAME}'
+             //Using Extended E-mail Notification plug in
+//             emailext attachLog: true,
+//                 body: 'Failed in sonar scanner stage', 
+//                 recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], 
+//                 subject: 'ERROR in Csharp-pipeline-as-code: Pipeline Name'
+             //Using jenkins default Email notifications
+             mail bcc: '', body: "<b>Failed in sonar scanner job</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> Build URL: ${env.BUILD_URL}",
+             cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR in Csharp-pipeline-as-code: Pipeline Name: -> ${env.JOB_NAME}", to: "mohankrishnavenkata82@gmail.com"; 
             }
         }        
             
