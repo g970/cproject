@@ -20,7 +20,7 @@ node {
         try 
         {
         //Testing email for failure condition(Uncomment below line only for testing)
-        //bat 'exit 1'
+        bat 'exit 1'
             
         msbuildHome = tool 'MSbuild_Home'
         scannerHome = tool 'SonarScanner_MSBuild'
@@ -45,7 +45,8 @@ node {
             //throw
              stage('send_email') 
          {
-            emailext attachLog: true, body: '<b>Failed in sonar scanner stage</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> Build URL: ${env.BUILD_URL}', 
+            emailext attachLog: true,
+                body: '<b>Failed in sonar scanner stage</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> Build URL: ${env.BUILD_URL}', 
                 recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], 
                 subject: 'ERROR in Csharp-pipeline-as-code: Pipeline Name: -> ${env.JOB_NAME}'
             }
