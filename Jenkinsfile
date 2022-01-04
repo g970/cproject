@@ -38,16 +38,17 @@ node {
         catch (all) {
             echo 'Something failed, I should sound the klaxons!'
             //throw
-        }        
-            
-        }
-      stage('send_email') 
-      {
+             stage('send_email') 
+         {
             //emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
             //working
             //emailext body: 'Email from Csharp pipeline as code', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Email from Jenkins Csharp pipeline as code'
             //mail bcc: '', body: 'From C sharp project jenkins pipeline as code', cc: '', from: 'From C sharp project jenkins pipeline as code', replyTo: 'mohankrishnavenkata82@gmail.com', subject: 'From C sharp project jenkins pipeline as code', to: 'mohankrishnavenkata82@gmail.com'
             mail bcc: '', body: "<b>Failed in sonar scanner job</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> Build URL: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR in Csharp-pipeline-as-code: Pipeline Name: -> ${env.JOB_NAME}", to: "mohankrishnavenkata82@gmail.com";  
+           }
+        }        
+            
         }
+     
     
     }
