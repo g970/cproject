@@ -18,7 +18,7 @@ node {
         try 
         {
         //Testing email for failure condition(Uncomment below line only for testing)
-        sh 'exit 1'
+        bat 'exit 1'
             
         msbuildHome = tool 'MSbuild_Home'
         scannerHome = tool 'SonarScanner_MSBuild'
