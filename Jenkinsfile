@@ -52,7 +52,7 @@ node {
                          """,
                          to: 'mohankrishnavenkata82@email.com'
 
-                    throw e // rethrow the error so that it gets printed in the job log, and so the job fails
+                    //throw e // rethrow the error so that it gets printed in the job log, and so the job fails
   
             
         stage('send_email') 
