@@ -39,18 +39,18 @@ node {
                 
             }
          
-        }  catch (e) {
-                    mail subject: "${env.JOB_NAME}#${env.BUILD_NUMBER} - Failed",
-                         body: """
-                 Build: ${env.BUILD_URL}
+        }  catch (all) {
+//                     mail subject: "${env.JOB_NAME}#${env.BUILD_NUMBER} - Failed",
+//                          body: """
+//                  Build: ${env.BUILD_URL}
 
-                 Error message: 
-                 ${e.getMessage()}
+//                  Error message: 
+//                  ${e.getMessage()}
 
-                 Stack Trace:
-                 ${e.getStackTrace().join('\n')}
-                         """,
-                         to: 'mohankrishnavenkata82@email.com'
+//                  Stack Trace:
+//                  ${e.getStackTrace().join('\n')}
+//                          """,
+//                          to: 'mohankrishnavenkata82@email.com'
 
                     //throw e // rethrow the error so that it gets printed in the job log, and so the job fails
   
