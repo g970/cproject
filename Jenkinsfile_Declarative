@@ -8,7 +8,7 @@ pipeline {
   stages{
     stage('checkout') 
        {
-           
+           steps {
         // Check out the C sharp code from a GitHub repository by using below pipeline syntax command
          git_Url = "https://github.com/mohankrishna1990/C-Sharp-Examples.git"
          
@@ -17,12 +17,13 @@ pipeline {
                    branches: [[name: '*/master']], 
                    extensions: [],
                    userRemoteConfigs: [[credentialsId: 'Git_repo_ID', url: "${git_Url}"]]])
+                   }
          }
     stage('static_code_analysis') 
         {
         //Testing email for failure condition(Uncomment below line only for testing)
         //bat 'exit 1'
-                
+          steps{      
         msbuildHome = tool 'MSbuild_Home'
         scannerHome = tool 'SonarScanner_MSBuild'
         sonar_url = "http://localhost:9000"
@@ -39,6 +40,7 @@ pipeline {
             //Below command is used to end the sonar scanner which we have begin in first step
             bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" end /d:sonar.login=${sonar_project_token}"
             } 
+        }
         }
         }
         post {  
