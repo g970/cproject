@@ -6,6 +6,7 @@ def sonar_project_token;
 node {
     stage('checkout') 
        {
+           
         // Check out the C sharp code from a GitHub repository by using below pipeline syntax command
          git_Url = "https://github.com/mohankrishna1990/C-Sharp-Examples.git"
          
@@ -19,7 +20,7 @@ node {
         {
         //Testing email for failure condition(Uncomment below line only for testing)
         //bat 'exit 1'
-            
+            try {    
         msbuildHome = tool 'MSbuild_Home'
         scannerHome = tool 'SonarScanner_MSBuild'
         sonar_url = "http://localhost:9000"
@@ -32,11 +33,28 @@ node {
             //Below command is used to generate the nuget package for rebbuild
             bat "\"${msbuildHome}\\MSBuild.exe\" -t:restore"
             //Below command is used to build the application
-            bat "\"${msbuildHome}\\MSBuild.exe\" /t:Rebuild"
+            bat "\"${msbuildHome}\\MSBuild1.exe\" /t:Rebuild"
             //Below command is used to end the sonar scanner which we have begin in first step
             bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" end /d:sonar.login=${sonar_project_token}"
+                
+            }
          
-        }    
+        }  catch (e) {
+                    mail subject: "${env.JOB_NAME}#${env.BUILD_NUMBER} - Failed",
+                         body: """
+                 Build: ${env.BUILD_URL}
+
+                 Error message: 
+                 ${e.getMessage()}
+
+                 Stack Trace:
+                 ${e.getStackTrace().join('\n')}
+                         """,
+                         to: 'mohankrishnavenkata82@email.com'
+
+                    throw e // rethrow the error so that it gets printed in the job log, and so the job fails
+  
+            
         stage('send_email') 
          {
              //Using Extended E-mail Notification plug in
@@ -54,7 +72,7 @@ node {
              subject: "Status of Pipeline: -> ${env.JOB_NAME} Build Number: ${env.BUILD_NUMBER} ", 
              to: "mohankrishnavenkata82@gmail.com"; 
             }
-            
+            }            
         }
      
     
