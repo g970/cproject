@@ -17,8 +17,6 @@ node {
          }
     stage('static_code_analysis') 
         {
-        try 
-        {
         //Testing email for failure condition(Uncomment below line only for testing)
         //bat 'exit 1'
             
@@ -37,30 +35,25 @@ node {
             bat "\"${msbuildHome}\\MSBuild.exe\" /t:Rebuild"
             //Below command is used to end the sonar scanner which we have begin in first step
             bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" end /d:sonar.login=${sonar_project_token}"
-         }
+         
         }    
-        catch (err) {
-            echo 'Sending email because above stage failed'
-            echo "Error detected, but we will continue to send Email."
-            //throw
-             stage('send_email') 
+        stage('send_email') 
          {
              //Using Extended E-mail Notification plug in
-            emailext attachLog: true,
-                body: 'Failed in sonar scanner stage', 
-                recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], 
-                subject: 'ERROR in Csharp-pipeline-as-code'
+//             emailext attachLog: true,
+//                 body: 'Failed in sonar scanner stage', 
+//                 recipientProviders: [[$class: 'DevelopersRecipientProvider'],[$class: 'RequesterRecipientProvider']], 
+//                 subject: 'ERROR in Csharp-pipeline-as-code'
              
              //Using jenkins default Email notifications
-//              mail bcc: '', 
-//              body: "<b>Failed in sonar scanner job</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> Build URL: ${env.BUILD_URL}",
-//              cc: '', charset: 'UTF-8', 
-//              from: '', mimeType: 'text/html', 
-//              replyTo: '', 
-//              subject: "ERROR in Csharp-pipeline-as-code: Pipeline Name: -> ${env.JOB_NAME}", 
-//              to: "mohankrishnavenkata82@gmail.com"; 
+             mail bcc: '', 
+             body: "<b>Status of C sharp scripted pipeline</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> Build URL: ${env.BUILD_URL}",
+             cc: '', charset: 'UTF-8', 
+             from: '', mimeType: 'text/html', 
+             replyTo: '', 
+             subject: "Status of Pipeline: -> ${env.JOB_NAME} Build Number: ${env.BUILD_NUMBER} ", 
+             to: "mohankrishnavenkata82@gmail.com"; 
             }
-        }        
             
         }
      
