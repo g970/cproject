@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>C_Sharp_Examples</RootNamespace>
-     <add name="myConnection" connectionString="Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=wrong" /> <!-- Noncompliant -->
+    <>
   </PropertyGroup>
 
 </Project>
