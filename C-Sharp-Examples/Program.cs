@@ -12,6 +12,28 @@ namespace C_Sharp_Examples
             int num = 3;
             target =- num;  // Noncompliant; target = -3. Is that really what's meant?
             target =+ num; // Noncompliant; target = 3
+            bool isTrue= true;  
+  
+if(isTrue == true);  
+{  
+      // Code  
+}  
+  
+if(isTrue == false);  
+{  
+     // code  
+}  
+  
+bool IsBoolMethod();  
+{  
+    return true;  
+}  
+  
+if(IsBoolMethod () == false);  
+{  
+     // code  
+}  
+__
             
         }
     }
