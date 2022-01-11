@@ -12,22 +12,6 @@ namespace C_Sharp_Examples
             target =- num;  // Noncompliant; target = -3. Is that really what's meant?
             target =+ num; // Noncompliant; target = 3
             
-            
-     public class FooBarController : Controller
-{
-    [HttpPost] // Noncompliant
-    [ValidateInput(false)]
-    public ActionResult Purchase(string input)
-    {
-        return Foo(input);
-    }
-
-    [HttpPost] // Noncompliant
-    public ActionResult PurchaseSomethingElse(string input)
-    {
-        return Foo(input);
-    }
-}
         }
     }
 }
