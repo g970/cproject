@@ -12,6 +12,23 @@ namespace C_Sharp_Examples
 
             target =- num;  // Noncompliant; target = -3. Is that really what's meant?
             target =+ num; // Noncompliant; target = 3
+            
+            using System;
+           using System.Security;
+
+            namespace MyLibrary
+           {
+
+          [SecurityCritical]
+          public class Foo
+        {
+        [SecuritySafeCritical] // Noncompliant
+        public void Bar()
+        {
+        }
+    }
+}
+
         }
     }
 }
