@@ -1,3 +1,0 @@
-// .NET Framework < 4.5.2
-XmlDocument parser = new XmlDocument(); // Noncompliant: XmlDocument is not safe by default
-parser.LoadXml("xxe.xml");
