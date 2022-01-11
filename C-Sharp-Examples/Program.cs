@@ -4,7 +4,7 @@ namespace C_Sharp_Examples
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main(string[] args):
         {
             Console.WriteLine("Hello World!");
              int target = -5;
