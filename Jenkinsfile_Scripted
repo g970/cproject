@@ -1,3 +1,4 @@
+
 def git_Url;
 def msbuildHome;
 def scannerHome;
@@ -17,7 +18,8 @@ node {
                    userRemoteConfigs: [[credentialsId: 'Git_repo_ID', url: "${git_Url}"]]])
          }
     stage('static_code_analysis') 
-        {  
+        {
+                
         msbuildHome = tool 'MSbuild_Home'
         scannerHome = tool 'SonarScanner_MSBuild'
         sonar_url = "http://localhost:9000"
@@ -25,6 +27,7 @@ node {
             
             withSonarQubeEnv() 
             {
+            //try{
             //Below command is used to begin the sonar scanner for our porject(jenkins_pipeline_scripted is the name of the token from sonar)   
             bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" begin /k:C_Sharp_sonarqube /d:sonar.host.url=${sonar_url} /d:sonar.login=${sonar_project_token}"
             //Below command is used to generate the nuget package for rebbuild
@@ -33,7 +36,7 @@ node {
             bat "\"${msbuildHome}\\MSBuild.exe\" /t:Rebuild"
             //Below command is used to end the sonar scanner which we have begin in first step
             bat "\"${scannerHome}\\SonarScanner.MSBuild.exe\" end /d:sonar.login=${sonar_project_token}"
-              }
+            }
         }        
              stage("test email"){
             emailext (
